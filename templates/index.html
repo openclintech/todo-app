@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="/todos/" method="post">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title">
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description">
+    <button type="submit">Add To-Do</button>
+</form>
+
+<ul>
+{% for todo in todos %}
+    <li>
+        {{ todo.title }} - {{ todo.description }}
+        <form action="/todos/{{ todo.id }}" method="post" style="display:inline;">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
